@@ -1,6 +1,14 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
@@ -21,3 +29,4 @@ jobs:
         run: |
           export KUBECONFIG=kubeconfig
           kubectl apply -f nodeapp.yaml
+
