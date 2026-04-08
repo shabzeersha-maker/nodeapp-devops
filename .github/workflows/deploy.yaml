@@ -1,4 +1,6 @@
-name: CI/CD Pipeline
+run: |
+  echo "${{ secrets.KUBECONFIG }}" > kubeconfig
+  export KUBECONFIG=$PWD/kubeconfigname: CI/CD Pipeline
 
 on:
   push:
@@ -23,7 +25,9 @@ jobs:
         run: docker push shabzeer/nodeapp:v1
 
       - name: Setup Kubeconfig
-        run: echo "${{ secrets.KUBECONFIG }}" > kubeconfig
+        run: |
+          echo "${{ secrets.KUBECONFIG }}" > kubeconfig
+          export KUBECONFIG=$PWD/kubeconfig
 
       - name: Deploy to Kubernetes
         run: |
